@@ -1,2 +1,38 @@
-background:black;
-<img src="yourimage.jpg" width="150">
+body{
+  margin:0;
+  padding:0;
+  background:#0d1117;
+  color:white;
+  font-family:Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.container{
+  text-align:center;
+}
+
+h1{
+  font-size:50px;
+  color:#00ffcc;
+}
+
+p{
+  max-width:700px;
+  margin:auto;
+  margin-bottom:20px;
+  font-size:20px;
+}
+
+a{
+  text-decoration:none;
+  background:#00ffcc;
+  color:black;
+  padding:12px 25px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+Commit changes
