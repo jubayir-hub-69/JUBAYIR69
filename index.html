@@ -1,25 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>JUBAYIR69</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JUBAYIR69 | Web3 Explorer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f8f9fa;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 100px 20px 80px;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 10px;
+    }
+    .tagline {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      margin-bottom: 30px;
+    }
+    .btn {
+      background: #000;
+      color: white;
+      padding: 14px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: 0.3s;
+    }
+    .btn:hover { transform: translateY(-3px); }
 
-    <link rel="stylesheet" href="style.css" />
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .profile-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 40px 0;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      padding: 20px;
+      flex: 1;
+      min-width: 280px;
+    }
+    .avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .mission {
+      background: #e63939;
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      margin: 40px 0;
+      text-align: center;
+    }
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .skill-tag {
+      background: #f1f1f1;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 500;
+    }
+    .social-icons {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .social-icons a {
+      font-size: 2.2rem;
+      margin: 0 15px;
+      color: #333;
+      transition: 0.3s;
+    }
+    .social-icons a:hover { color: #667eea; }
+  </style>
 </head>
-
 <body>
 
-    <div class="container">
-        <h1>JUBAYIR69</h1>
+  <div class="hero">
+    <h1>Hi, I'm <strong>JUBAYIR69</strong></h1>
+    <p class="tagline">Web3 Explorer | Early Testnet & Airdrop Hunter</p>
+    <a href="#contact" class="btn">Contact Me</a>
+  </div>
 
-        <p>
-            Web3 & Crypto Professional | Experienced in Airdrop Campaigns,
-            Ambassador & Moderator Support, and Contest Creation.
-        </p>
+  <div class="container">
+    <div class="profile-section">
+      <div class="card">
+        <img src="profile.jpg" alt="Jubayir" class="avatar">
+        <h3 style="margin-top:15px;">JUBAYIR69</h3>
+        <p>UTC +6 • Dhaka, BD</p>
+      </div>
 
-        <a href="#">Contact Me</a>
+      <div class="card">
+        <h2>Web3 Professional</h2>
+        <p>I actively participate in Testnets, Airdrop campaigns, Ambassador programs and Community building.</p>
+      </div>
     </div>
 
+    <div class="mission">
+      <h2>My Mission</h2>
+      <p style="font-size:1.2rem;">
+        To help Web3 projects grow by building strong communities, participating in testnets, and creating meaningful engagement in the crypto space.
+      </p>
+    </div>
+
+    <div style="text-align:center; margin:40px 0;">
+      <h2>Skills & Expertise</h2>
+      <div class="skills">
+        <span class="skill-tag">Airdrop Hunting</span>
+        <span class="skill-tag">Testnet Farming</span>
+        <span class="skill-tag">Community Management</span>
+        <span class="skill-tag">Ambassador</span>
+        <span class="skill-tag">Web3 Research</span>
+        <span class="skill-tag">Contest Creation</span>
+      </div>
+    </div>
+
+    <div class="social-icons" id="contact">
+      <a href="https://x.com/yourusername" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://t.me/yourusername" target="_blank"><i class="fab fa-telegram"></i></a>
+      <a href="#" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="mailto:your@email.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+
+  <footer style="text-align:center; padding:30px; background:#333; color:white; margin-top:50px;">
+    Made with ❤️ for the Web3 Community • JUBAYIR69
+  </footer>
+
 </body>
-</html><link rel="stylesheet" href="style.css" />
+</html>
