@@ -75,3 +75,43 @@ Commit changes
 .skill6 {
   background: linear-gradient(45deg, #5f27cd, #341f97);
 }
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.skills span {
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  display: inline-block;
+}
+
+.skill1 {
+  background: #ff4757;
+}
+
+.skill2 {
+  background: #1dd1a1;
+}
+
+.skill3 {
+  background: #3742fa;
+}
+
+.skill4 {
+  background: #e056fd;
+}
+
+.skill5 {
+  background: #ffa502;
+}
+
+.skill6 {
+  background: #6c5ce7;
+}
