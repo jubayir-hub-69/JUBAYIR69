@@ -36,3 +36,42 @@ a{
 }
 
 Commit changes
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.skills span {
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.skill1 {
+  background: linear-gradient(45deg, #ff6b6b, #ff4757);
+}
+
+.skill2 {
+  background: linear-gradient(45deg, #1dd1a1, #10ac84);
+}
+
+.skill3 {
+  background: linear-gradient(45deg, #54a0ff, #2e86de);
+}
+
+.skill4 {
+  background: linear-gradient(45deg, #f368e0, #c44569);
+}
+
+.skill5 {
+  background: linear-gradient(45deg, #feca57, #ff9f43);
+}
+
+.skill6 {
+  background: linear-gradient(45deg, #5f27cd, #341f97);
+}
