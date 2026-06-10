@@ -1,245 +1,535 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JUBAYIR HAIDER | Web3 Explorer • Testnet Specialist • Community Builder</title>
+  <meta name="description" content="JUBAYIR HAIDER — Web3 Explorer • Blockchain Believer • Community Builder" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #f8f9fa;
-      color: #1a1a1a;
-      line-height: 1.6;
+    :root{
+      --bg: #060816;
+      --bg2: #0a1020;
+      --card: rgba(16, 20, 40, .68);
+      --card-strong: rgba(18, 16, 34, .9);
+      --line: rgba(186, 145, 255, .16);
+      --text: #eef2ff;
+      --muted: #c7d2fe;
+      --accent: #8b5cf6;
+      --accent2: #22d3ee;
+      --accent3: #ec4899;
+      --shadow: 0 18px 60px rgba(0,0,0,.42);
+      --radius: 28px;
     }
-    .hero {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      text-align: center;
-      padding: 100px 20px 80px;
-    }
-    .hero h1 {
-      font-size: 3.2rem;
-      margin-bottom: 10px;
-    }
-    .tagline {
-      font-size: 1.3rem;
-      opacity: 0.95;
-      margin-bottom: 30px;
-    }
-    .btn {
-      background: #000;
-      color: white;
-      padding: 14px 40px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-      transition: 0.3s;
-    }
-    .btn:hover { transform: translateY(-3px); }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(139,92,246,.28), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(34,211,238,.20), transparent 26%),
+        radial-gradient(circle at 50% 85%, rgba(236,72,153,.18), transparent 24%),
+        linear-gradient(180deg, #050816 0%, #080b18 35%, #060816 100%);
+      overflow-x:hidden;
+      min-height:100vh;
+      line-height:1.6;
     }
-    .profile-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin: 40px 0;
-      justify-content: center;
+
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      inset:auto;
+      width:42vw;
+      height:42vw;
+      border-radius:50%;
+      filter:blur(90px);
+      pointer-events:none;
+      z-index:0;
+      opacity:.55;
+      animation: floatBlob 18s ease-in-out infinite alternate;
     }
-    .card {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      padding: 20px;
-      flex: 1;
-      min-width: 280px;
+    body::before{
+      top:-10vw; left:-10vw;
+      background:rgba(139,92,246,.14);
     }
-    .avatar {
-      width: 180px;
-      height: 180px;
-      border-radius: 20px;
-      object-fit: cover;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    body::after{
+      right:-12vw; bottom:-12vw;
+      background:rgba(34,211,238,.11);
+      animation-duration:22s;
     }
-    .mission{
-  background:linear-gradient(135deg,#7c3aed,#9333ea);
-  color:white;
-  padding:40px;
-  border-radius:20px;
-  margin:40px 0;
-  text-align:center;
+
+    @keyframes floatBlob{
+      0%{transform:translate3d(0,0,0) scale(1)}
+      50%{transform:translate3d(24px,-18px,0) scale(1.08)}
+      100%{transform:translate3d(-10px,18px,0) scale(.96)}
     }
+
+    .wrap{
+      position:relative;
+      z-index:1;
+      width:min(1120px, calc(100% - 24px));
+      margin:0 auto;
+      padding:18px 0 34px;
     }
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 20px;
+
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:opacity .75s ease, transform .75s ease;
     }
-    .skill-tag {
-      background: #f1f1f1;
-      padding: 8px 20px;
-      border-radius: 50px;
-      font-weight: 500;
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
     }
-    .social-icons {
-      text-align: center;
-      margin: 30px 0;
+
+    .glass{
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border:1px solid var(--line);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:var(--shadow);
     }
-    .social-icons a {
-      font-size: 2.2rem;
-      margin: 0 15px;
-      color: #333;
-      transition: 0.3s;
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-radius:34px;
+      padding:92px 20px 86px;
+      text-align:center;
+      background:
+        linear-gradient(rgba(2,6,23,.58), rgba(2,6,23,.72)),
+        url('https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/hero-bg.jpg.jpg') center/cover no-repeat;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow);
+      isolation:isolate;
     }
-    .social-icons a:hover { color: #667eea; }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(139,92,246,.20), transparent 18%),
+        radial-gradient(circle at 75% 20%, rgba(34,211,238,.12), transparent 16%),
+        radial-gradient(circle at 55% 80%, rgba(236,72,153,.14), transparent 18%);
+      z-index:-1;
+      animation: heroPulse 10s ease-in-out infinite;
+    }
+
+    @keyframes heroPulse{
+      0%,100%{transform:scale(1);opacity:.9}
+      50%{transform:scale(1.04);opacity:1}
+    }
+
+    .hero .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      font-size:.9rem;
+      letter-spacing:.2px;
+      margin-bottom:18px;
+      color:#f8fafc;
+    }
+
+    .hero h1{
+      font-size:clamp(2.1rem, 5vw, 4rem);
+      line-height:1.05;
+      letter-spacing:-.04em;
+      margin-bottom:14px;
+      font-weight:900;
+      text-shadow:0 10px 35px rgba(0,0,0,.28);
+      background:linear-gradient(90deg, #f8f1ff, #c4b5fd 55%, #a5f3fc);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero .tagline{
+      font-size:clamp(1rem, 2.3vw, 1.25rem);
+      color:rgba(255,255,255,.9);
+      margin-bottom:30px;
+      text-wrap:balance;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:14px 24px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:700;
+      color:#fff;
+      background:linear-gradient(90deg, rgba(139,92,246,.88), rgba(34,211,238,.78));
+      box-shadow:0 14px 34px rgba(139,92,246,.28);
+      border:1px solid rgba(255,255,255,.18);
+      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+    .btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 18px 40px rgba(139,92,246,.36);
+      filter:saturate(1.05);
+    }
+
+    .grid-top{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:1.05fr 1.15fr;
+      gap:18px;
+    }
+
+    .card{
+      border-radius:var(--radius);
+      background:var(--card);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .profile-card{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      padding:24px;
+      min-height:100%;
+    }
+
+    .avatar{
+      width:96px;
+      height:96px;
+      border-radius:22px;
+      object-fit:cover;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 12px 28px rgba(0,0,0,.35);
+      transition:transform .35s ease, box-shadow .35s ease;
+      flex:none;
+    }
+    .avatar:hover{
+      transform:scale(1.04) rotate(-1deg);
+      box-shadow:0 16px 34px rgba(0,0,0,.42);
+    }
+
+    .profile-card h3{
+      font-size:1.45rem;
+      line-height:1.15;
+      margin-bottom:6px;
+      font-weight:800;
+      color:#f5f3ff;
+    }
+    .profile-card p{
+      color:#c4b5fd;
+      font-size:1rem;
+    }
+
+    .bio-card{
+      padding:24px;
+      display:flex;
+      align-items:center;
+    }
+    .bio-card p{
+      color:#dbe4ff;
+      font-size:1.02rem;
+      line-height:1.8;
+    }
+
+    .section{
+      margin-top:26px;
+      text-align:center;
+    }
+
+    .section-title{
+      font-size:clamp(1.4rem, 3vw, 2rem);
+      font-weight:900;
+      letter-spacing:-.03em;
+      margin-bottom:18px;
+      color:#e9d5ff;
+      text-shadow:0 8px 30px rgba(139,92,246,.22);
+    }
+
+    .pills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+      max-width:860px;
+      margin:0 auto;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding:10px 16px;
+      border-radius:999px;
+      color:#fff;
+      font-size:.95rem;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 10px 25px rgba(0,0,0,.16);
+      transition:transform .22s ease, filter .22s ease, box-shadow .22s ease;
+      white-space:nowrap;
+    }
+    .pill:hover{
+      transform:translateY(-2px) scale(1.03);
+      filter:saturate(1.08);
+      box-shadow:0 14px 28px rgba(0,0,0,.24);
+    }
+
+    .pill.red{background:linear-gradient(135deg, #ef4444, #fb7185);}
+    .pill.green{background:linear-gradient(135deg, #10b981, #34d399);}
+    .pill.blue{background:linear-gradient(135deg, #3b82f6, #60a5fa);}
+    .pill.purple{background:linear-gradient(135deg, #8b5cf6, #a855f7);}
+    .pill.orange{background:linear-gradient(135deg, #f59e0b, #f97316);}
+
+    .amb-card{
+      width:min(540px, 100%);
+      margin:30px auto 0;
+      overflow:hidden;
+      border-radius:32px;
+      border:1px solid rgba(196,181,253,.35);
+      background:linear-gradient(180deg, rgba(20,16,38,.96), rgba(16,18,34,.98));
+      box-shadow:0 30px 70px rgba(139,92,246,.24);
+      transition:transform .28s ease, box-shadow .28s ease;
+    }
+    .amb-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 34px 80px rgba(139,92,246,.30);
+    }
+
+    .amb-head{
+      padding:20px 18px;
+      text-align:center;
+      background:linear-gradient(90deg, #7c3aed, #c026d3);
+    }
+    .amb-head h2{
+      font-size:1.55rem;
+      margin-bottom:4px;
+      color:#f8f5ff;
+    }
+    .amb-head p{
+      color:#f3e8ff;
+      opacity:.95;
+      font-size:1.1rem;
+    }
+
+    .amb-images{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      padding:12px;
+    }
+    .amb-images img{
+      width:100%;
+      height:300px;
+      object-fit:contain;
+      border-radius:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      transition:transform .35s ease, filter .35s ease;
+    }
+    .amb-images img:hover{
+      transform:scale(1.03);
+      filter:brightness(1.04);
+    }
+
+    .amb-badges{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      padding:0 16px 18px;
+    }
+    .badge{
+      text-align:center;
+      padding:12px 14px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .badge.purple{background:#8b5cf6;color:#fff;}
+    .badge.cyan{background:#22d3ee;color:#111827;}
+
+    .social-icons{
+      display:flex;
+      justify-content:center;
+      gap:22px;
+      margin:28px 0 8px;
+      flex-wrap:wrap;
+    }
+    .social-icons a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:58px;
+      height:58px;
+      border-radius:16px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 14px 28px rgba(0,0,0,.2);
+      transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+      text-decoration:none;
+    }
+    .social-icons a:hover{
+      transform:translateY(-4px) scale(1.03);
+      background:rgba(255,255,255,.10);
+      box-shadow:0 18px 34px rgba(0,0,0,.28);
+    }
+    .social-icons img{
+      width:32px;
+      height:32px;
+      display:block;
+    }
+
+    footer{
+      margin-top:32px;
+      text-align:center;
+      padding:22px 18px;
+      border-radius:22px;
+      color:#f8fafc;
+      background:linear-gradient(135deg, rgba(17,24,39,.96), rgba(31,41,55,.96));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      font-weight:700;
+      letter-spacing:.4px;
+    }
+
+    @media (max-width: 900px){
+      .grid-top{
+        grid-template-columns:1fr;
+      }
+      .hero{
+        padding:78px 18px 72px;
+      }
+    }
+
+    @media (max-width: 640px){
+      .wrap{
+        width:min(100% - 14px, 1120px);
+        padding-top:10px;
+      }
+      .hero{
+        border-radius:26px;
+        padding:64px 16px 60px;
+      }
+      .profile-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:14px;
+      }
+      .amb-images{
+        grid-template-columns:1fr;
+      }
+      .amb-images img{
+        height:260px;
+      }
+      .amb-badges{
+        grid-template-columns:1fr;
+      }
+    }
   </style>
 </head>
 <body>
+  <main class="wrap">
+    <section class="hero reveal">
+      <div class="eyebrow">Hi,</div>
+      <h1>I am JUBAYIR HAIDER</h1>
+      <p class="tagline">Web3 Explorer • Blockchain Believer • Community Builder</p>
+      <a class="btn" href="https://x.com/jubayirhaider90" target="_blank" rel="noopener">
+        Contact for Collab 𝕏
+      </a>
+    </section>
 
-  <!-- Hero Section with Background Image -->
-<div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/hero-bg.jpg.jpg'); background-size: cover; background-position: center; padding: 100px 20px 85px 20px; text-align: center; color: white; position: relative;">
+    <section class="grid-top section">
+      <div class="card profile-card reveal">
+        <img
+          class="avatar"
+          src="https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/avatar.jpg.png"
+          alt="Jubayir Haider"
+        />
+        <div>
+          <h3>JUBAYIR69</h3>
+          <p>📍 Dhaka, Bangladesh 🇧🇩</p>
+        </div>
+      </div>
 
-  <p style="font-size: 1.3rem; margin: 0 0 8px 0; opacity: 0.95;">
-    Hi,
-  </p>
+      <div class="card bio-card reveal">
+        <p>
+          Passionate Web3 Content Creator and Influencer dedicated to researching emerging projects and delivering valuable insights to the crypto community. A committed learner who consistently works hard to grow and contribute meaningfully in the decentralized space.
+        </p>
+      </div>
+    </section>
 
-  <h1 style="font-size: 2.85rem; margin: 0; background: linear-gradient(90deg, #f3e8ff, #e0d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
-    I am JUBAYIR HAIDER
-  </h1>
+    <section class="section reveal">
+      <h2 class="section-title">My Experience</h2>
+      <div class="pills">
+        <span class="pill red">Web3 Community Building</span>
+        <span class="pill green">Moderator</span>
+        <span class="pill blue">Ambassador</span>
+        <span class="pill purple">Content Creator</span>
+        <span class="pill orange">Crypto Expert</span>
+      </div>
+    </section>
 
-  <p style="font-size: 1.35rem; margin: 12px 0 35px 0; opacity: 0.95;">
-    Web3 Explorer • Blockchain Believer • Community Builder
-  </p>
+    <section class="amb-card reveal">
+      <div class="amb-head">
+        <h2>🎖️ OG Ambassador</h2>
+        <p>DTELECOM</p>
+      </div>
 
-  <a href="https://x.com/jubayirhaider90" target="_blank" rel="noopener" 
-     style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); color: white; padding: 14px 32px; border-radius: 50px; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.3);">
-    Contact for Collab 𝕏
-  </a>
+      <div class="amb-images">
+        <img
+          src="https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/IMG_20260313_142757_843.jpg"
+          alt="Welcome"
+        />
+        <img
+          src="https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/IMG_20260518_121349.jpg"
+          alt="Role"
+        />
+      </div>
 
-</div>
+      <div class="amb-badges">
+        <span class="badge purple">OG Ambassador</span>
+        <span class="badge cyan">Discord Role</span>
+      </div>
+    </section>
 
-</div>
-  <!-- Profile + Web3 Card - Premium Dark Style -->
-<div style="display: flex; flex-wrap: wrap; gap: 20px; margin: 30px 0; padding: 0 15px;">
+    <section class="social-icons reveal" aria-label="Social links">
+      <a href="https://x.com/jubayirhaider90" target="_blank" rel="noopener" aria-label="X">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X" />
+      </a>
+      <a href="https://t.me/JUBAYIR69" target="_blank" rel="noopener" aria-label="Telegram">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" />
+      </a>
+      <a href="https://discord.com/users/775330417414635530" target="_blank" rel="noopener" aria-label="Discord">
+        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" />
+      </a>
+      <a href="mailto:jubayirhaider56@gmail.com" target="_blank" rel="noopener" aria-label="Email">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968534.png" alt="Email" />
+      </a>
+    </section>
 
-  <!-- Profile Card -->
-  <div style="flex: 1; min-width: 280px; display: flex; align-items: center; gap: 18px; padding: 24px; background: rgba(30, 27, 55, 0.85); backdrop-filter: blur(12px); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(167, 139, 250, 0.2);">
-    <img src="https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/avatar.jpg.png" 
-         alt="Jubayir Haider" 
-         style="width: 88px; height: 88px; border-radius: 16px; object-fit: cover; box-shadow: 0 6px 20px rgba(0,0,0,0.4);">
-    <div>
-      <h3 style="margin: 0 0 6px 0; font-size: 1.45rem; color: #e0d4ff;">JUBAYIR69</h3>
-      <p style="margin: 0; color: #c4b5fd;">📍 Dhaka, Bangladesh 🇧🇩</p>
-    </div>
-  </div>
+    <footer class="reveal">Made with JUBAYIR69🚀</footer>
+  </main>
 
-  <!-- Web3 Card -->
-  <div style="flex: 1; min-width: 280px; padding: 24px; background: rgba(30, 27, 55, 0.85); backdrop-filter: blur(12px); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(167, 139, 250, 0.2);">
-    <p style="margin: 0; color: #d1d5db; line-height: 1.7; font-size: 1.03rem;">
-      Passionate Web3 Content Creator and Influencer dedicated to researching emerging projects and delivering valuable insights to the crypto community. A committed learner who consistently works hard to grow and contribute meaningfully in the decentralized space.
-    </p>
-  </div>
+  <script>
+    const items = document.querySelectorAll('.reveal');
 
-</div>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
 
-</div>
-
-   <!-- My Experience -->
-<h2 style="text-align: center; margin: 45px 0 20px 0; font-size: 1.85rem; color: #4f46e5;">My Experience</h2>
-
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 auto; max-width: 680px; padding: 0 10px;">
-  
-  <span style="background: #ef4444; color: white; padding: 9px 17px; border-radius: 50px; font-size: 0.93rem; font-weight: 500; white-space: nowrap;">Web3 Community Building</span>
-  
-  <span style="background: #10b981; color: white; padding: 9px 17px; border-radius: 50px; font-size: 0.93rem; font-weight: 500; white-space: nowrap;">Moderator</span>
-  
-  <span style="background: #3b82f6; color: white; padding: 9px 17px; border-radius: 50px; font-size: 0.93rem; font-weight: 500; white-space: nowrap;">Ambassador</span>
-  
-  <span style="background: #8b5cf6; color: white; padding: 9px 17px; border-radius: 50px; font-size: 0.93rem; font-weight: 500; white-space: nowrap;">Content Creator</span>
-  
-  <span style="background: #f59e0b; color: white; padding: 9px 17px; border-radius: 50px; font-size: 0.93rem; font-weight: 500; white-space: nowrap;">Crypto Expert</span>
-  
-</div>
-    </div>
-   <!-- DTELECOM OG Ambassador - Clean Final -->
-<div style="max-width: 480px; margin: 40px auto; background: #1a142f; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(139, 92, 246, 0.4); border: 1px solid #c4b5fd;">
-
-  <!-- Title -->
-  <div style="background: linear-gradient(90deg, #7c3aed, #c026d3); padding: 20px; text-align: center;">
-    <h2 style="color: #f3e8ff; margin: 0; font-size: 1.75rem;">🎖️ OG Ambassador</h2>
-    <p style="color: #e0d4ff; margin: 6px 0 0 0; font-size: 1.2rem;">DTELECOM</p>
-  </div>
-
-  <!-- Images -->
-  <div style="display: flex; padding: 12px; gap: 10px;">
-    <img src="https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/IMG_20260313_142757_843.jpg" 
-         alt="Welcome" 
-         style="width: 50%; height: 300px; object-fit: contain; border-radius: 16px;">
-
-    <img src="https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/IMG_20260518_121349.jpg" 
-         alt="Role" 
-         style="width: 50%; height: 300px; object-fit: contain; border-radius: 16px;">
-  </div>
-
-  <!-- Badges (একবারই) -->
-  <div style="padding: 18px 20px 22px; display: flex; gap: 12px;">
-    <span style="flex: 1; background: #8b5cf6; color: white; padding: 12px; border-radius: 50px; text-align: center; font-weight: 700;">OG Ambassador</span>
-    <span style="flex: 1; background: #22d3ee; color: #111827; padding: 12px; border-radius: 50px; text-align: center; font-weight: 700;">Discord Role</span>
-  </div>
-</div>
-
-    
-    <!-- Social Icons - Final Clean Version -->
-<div style="display: flex; justify-content: center; gap: 25px; margin: 30px 0; flex-wrap: wrap;">
-
-  <!-- X -->
-  <a href="https://x.com/jubayirhaider90" target="_blank" rel="noopener">
-    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" width="52" height="52" alt="X" style="border-radius: 12px;">
-  </a>
-
-  <!-- Telegram -->
-  <a href="https://t.me/JUBAYIR69" target="_blank" rel="noopener">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" width="52" height="52" alt="Telegram" style="border-radius: 12px;">
-  </a>
-
-  <!-- Discord -->
-<a href="https://discord.com/users/775330417414635530" target="_blank" rel="noopener">
-
-<img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" width="52" height="52" alt="Discord" style="border-radius: 12px;">
-
-</a>
-
-  <!-- Email -->
-  <a href="mailto:jubayirhaider56@gmail.com" target="_blank" rel="noopener">
-    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968534.png" width="52" height="52" alt="Email" style="border-radius: 12px;">
-  </a>
-
-</div>
-  </a>
-
-</div>
-
-</div>
-  </a>
-
-</div>
-  </a>
-
-</div>
-    </div>
-  </div>
-
-  <footer style="text-align:center; padding:30px; background:#333; color:white; margin-top:50px;">
-    Made with JUBAYIR69🚀
-  </footer>
-
+    items.forEach((item) => observer.observe(item));
+  </script>
 </body>
 </html>
