@@ -76,12 +76,181 @@
       100%{transform:translate(-10px,18px) scale(.96)}
     }
 
+    /* ========== Top Navigation & Side Menu Styles ========== */
+    .top-nav {
+      position: absolute;
+      top: 24px;
+      right: clamp(16px, 5vw, 40px);
+      z-index: 100;
+    }
+
+    .menu-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .menu-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .menu-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(340px, 100%);
+      height: 100vh;
+      background: #060913;
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 1000;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 30px 24px;
+      box-shadow: -15px 0 50px rgba(0,0,0,0.6);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-menu.open {
+      right: 0;
+    }
+
+    .side-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .side-menu-header h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: rotate(90deg);
+    }
+
+    .menu-section-title {
+      font-size: 0.9rem;
+      color: #8b5cf6;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      padding-left: 4px;
+    }
+
+    .menu-item {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .menu-item:hover {
+      border-color: rgba(139, 92, 246, 0.5);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .menu-item-title {
+      font-weight: 800;
+      color: #f8f1ff;
+      margin-bottom: 14px;
+      font-size: 1.15rem;
+    }
+
+    .menu-item-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .menu-item-links a {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .menu-item-links a.live {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    .menu-item-links a.github {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .menu-item-links a:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    /* ========== Main Content Styles ========== */
     .page{
       position:relative;
       z-index:1;
       width:min(1140px, calc(100% - 22px));
       margin:0 auto;
-      padding:14px 0 30px;
+      padding:74px 0 30px; /* Increased top padding to avoid nav overlap */
     }
 
     .reveal{
@@ -334,133 +503,6 @@
     .pill.purple{background:linear-gradient(135deg, #8b5cf6, #a855f7);}
     .pill.orange{background:linear-gradient(135deg, #f59e0b, #f97316);}
 
-    /* ========== New Projects Section Styles ========== */
-    .projects-container {
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    .projects-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
-      border: 1px solid rgba(139, 92, 246, 0.4);
-      color: #fff;
-      font-size: 1.1rem;
-      font-weight: 800;
-      border-radius: 999px;
-      cursor: pointer;
-      box-shadow: 0 12px 25px rgba(0,0,0,.3);
-      transition: all 0.3s ease;
-    }
-
-    .projects-toggle i {
-      font-size: 1.2rem;
-      color: #a5f3fc;
-    }
-
-    .projects-toggle:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 35px rgba(139, 92, 246, 0.3);
-      border-color: rgba(139, 92, 246, 0.8);
-    }
-
-    .projects-wrapper {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0;
-    }
-
-    .projects-wrapper.show {
-      max-height: 2000px; /* Large enough to hold the grid */
-      opacity: 1;
-      margin-top: 25px;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      text-align: left;
-    }
-
-    .project-card {
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border: 1px solid var(--line-strong);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 45px rgba(139, 92, 246, 0.2);
-      border-color: rgba(139, 92, 246, 0.5);
-    }
-
-    .project-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-bottom: 1px solid rgba(255,255,255,.05);
-    }
-
-    .project-info {
-      padding: 20px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #f4f1ff;
-      margin-bottom: 15px;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 12px;
-      margin-top: auto;
-    }
-
-    .btn-link {
-      flex: 1;
-      text-align: center;
-      padding: 10px;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      text-decoration: none;
-      color: #fff;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .btn-live {
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      border: 1px solid rgba(59, 130, 246, 0.4);
-    }
-    .btn-live:hover { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
-
-    .btn-github {
-      background: linear-gradient(135deg, #4b5563, #374151);
-      border: 1px solid rgba(75, 85, 99, 0.4);
-    }
-    .btn-github:hover { background: linear-gradient(135deg, #374151, #1f2937); }
-
-    /* ================================================= */
-
     .amb-card{
       width:min(560px, 100%);
       margin:30px auto 0;
@@ -571,13 +613,11 @@
 
     @media (max-width: 960px){
       .top-grid{grid-template-columns:1fr}
-      .hero{padding:76px 18px 70px}
     }
 
     @media (max-width: 640px){
       .page{
         width:min(100% - 12px, 1140px);
-        padding-top:8px;
       }
       .hero{
         border-radius:26px;
@@ -596,9 +636,6 @@
       .amb-badges{
         grid-template-columns:1fr;
       }
-      .projects-grid{
-        grid-template-columns: 1fr;
-      }
       .social-icons{
         gap:14px;
       }
@@ -609,6 +646,72 @@
   </style>
 </head>
 <body>
+
+  <!-- Top Right Menu Button -->
+  <div class="top-nav">
+    <button class="menu-btn" id="openMenuBtn" aria-label="Open Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- Menu Overlay Background -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <!-- Side Drawer Menu -->
+  <aside class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+      <h3>Menu</h3>
+      <button class="close-btn" id="closeMenuBtn" aria-label="Close Menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="side-menu-content">
+      <div class="menu-section-title">BUILD BY JUBAYIR69</div>
+
+      <!-- Project 1 -->
+      <div class="menu-item">
+        <div class="menu-item-title">my-shelby-uploader</div>
+        <div class="menu-item-links">
+          <a href="https://my-shelby-uploader.vercel.app/" target="_blank" rel="noopener" class="live">
+            <i class="fa-solid fa-globe"></i> Live
+          </a>
+          <a href="https://github.com/jubayir-hub-69/my-shelby-uploader" target="_blank" rel="noopener" class="github">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="menu-item">
+        <div class="menu-item-title">arcbank-app</div>
+        <div class="menu-item-links">
+          <a href="https://arcbank-app.vercel.app/" target="_blank" rel="noopener" class="live">
+            <i class="fa-solid fa-globe"></i> Live
+          </a>
+          <a href="https://github.com/jubayir-hub-69/arcbank-app" target="_blank" rel="noopener" class="github">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="menu-item">
+        <div class="menu-item-title">dspaces</div>
+        <div class="menu-item-links">
+          <a href="https://dspaces.vercel.app/" target="_blank" rel="noopener" class="live">
+            <i class="fa-solid fa-globe"></i> Live
+          </a>
+          <a href="https://github.com/jubayir-hub-69/dspaces" target="_blank" rel="noopener" class="github">
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- Main Website Content -->
   <main class="page">
     <section class="hero reveal">
       <div class="eyebrow">Hi,</div>
@@ -661,68 +764,6 @@
       </div>
     </section>
 
-    <!-- NEW PROJECTS SECTION START -->
-    <section class="projects-container reveal">
-      <button class="projects-toggle" id="projectsBtn">
-        <i class="fa-solid fa-ellipsis-vertical"></i> BUILD BY JUBAYIR69
-      </button>
-
-      <div class="projects-wrapper" id="projectsWrapper">
-        <div class="projects-grid">
-          
-          <!-- Project 1 -->
-          <div class="project-card">
-            <img src="https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/my-shelby-uploader.jpg" alt="my-shelby-uploader" class="project-img">
-            <div class="project-info">
-              <h3 class="project-title">my-shelby-uploader</h3>
-              <div class="project-links">
-                <a href="https://my-shelby-uploader.vercel.app/" target="_blank" rel="noopener" class="btn-link btn-live">
-                  <i class="fa-solid fa-globe"></i> Live
-                </a>
-                <a href="https://github.com/jubayir-hub-69/my-shelby-uploader" target="_blank" rel="noopener" class="btn-link btn-github">
-                  <i class="fa-brands fa-github"></i> GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div class="project-card">
-            <img src="https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/arcbank-app.jpg" alt="arcbank-app" class="project-img">
-            <div class="project-info">
-              <h3 class="project-title">arcbank-app</h3>
-              <div class="project-links">
-                <a href="https://arcbank-app.vercel.app/" target="_blank" rel="noopener" class="btn-link btn-live">
-                  <i class="fa-solid fa-globe"></i> Live
-                </a>
-                <a href="https://github.com/jubayir-hub-69/arcbank-app" target="_blank" rel="noopener" class="btn-link btn-github">
-                  <i class="fa-brands fa-github"></i> GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="project-card">
-            <img src="https://raw.githubusercontent.com/jubayir-hub-69/JUBAYIR69/main/dspaces.jpg" alt="dspaces" class="project-img">
-            <div class="project-info">
-              <h3 class="project-title">dspaces</h3>
-              <div class="project-links">
-                <a href="https://dspaces.vercel.app/" target="_blank" rel="noopener" class="btn-link btn-live">
-                  <i class="fa-solid fa-globe"></i> Live
-                </a>
-                <a href="https://github.com/jubayir-hub-69/dspaces" target="_blank" rel="noopener" class="btn-link btn-github">
-                  <i class="fa-brands fa-github"></i> GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!-- NEW PROJECTS SECTION END -->
-
     <section class="social-icons reveal" aria-label="Social links">
       <a href="https://x.com/jubayirhaider90" target="_blank" rel="noopener" aria-label="X">
         <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="X" />
@@ -744,7 +785,6 @@
   <script>
     // Reveal Animation Script
     const revealItems = document.querySelectorAll('.reveal');
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -753,16 +793,28 @@
         }
       });
     }, { threshold: 0.16 });
-
     revealItems.forEach((item) => observer.observe(item));
 
-    // Project Toggle Script
-    const projectsBtn = document.getElementById('projectsBtn');
-    const projectsWrapper = document.getElementById('projectsWrapper');
+    // Side Menu Toggle Logic
+    const openMenuBtn = document.getElementById('openMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
 
-    projectsBtn.addEventListener('click', () => {
-      projectsWrapper.classList.toggle('show');
-    });
+    function toggleMenu() {
+      sideMenu.classList.toggle('open');
+      menuOverlay.classList.toggle('open');
+      // Prevent background scrolling when menu is open
+      if(sideMenu.classList.contains('open')){
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+
+    openMenuBtn.addEventListener('click', toggleMenu);
+    closeMenuBtn.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', toggleMenu); // Click outside to close
   </script>
 </body>
 </html>
