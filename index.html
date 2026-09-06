@@ -560,6 +560,12 @@
       display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
       perspective: 1400px;
     }
+    @media (min-width: 1025px){
+      .projects-grid{ grid-template-columns:repeat(6, 1fr); }
+      .projects-grid > .project-card{ grid-column:span 2; }
+      .projects-grid > .project-card:nth-child(4),
+      .projects-grid > .project-card:nth-child(5){ grid-column:span 3; }
+    }
     .project-card{
       position:relative;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015));
@@ -584,6 +590,210 @@
     .project-info{ padding:22px; flex-grow:1; display:flex; flex-direction:column; }
     .project-info .project-title{ font-size:1.28rem; margin-bottom:8px; }
     .project-info .project-desc{ font-size:.95rem; margin-bottom:14px; }
+
+    /* ========== CSS abstract project thumbs ========== */
+    .css-thumb{
+      position:relative; width:100%; height:188px; overflow:hidden; display:block;
+      border-bottom:1px solid rgba(255,255,255,.05);
+      transform-origin:center center;
+      transition: transform .7s var(--ease);
+    }
+    .project-card:hover .css-thumb{ transform:scale(1.06); }
+
+    .css-thumb-leash{
+      background:
+        radial-gradient(ellipse at 50% 48%, rgba(139,92,246,.34), transparent 52%),
+        radial-gradient(ellipse at 18% 82%, rgba(34,211,238,.2), transparent 42%),
+        radial-gradient(ellipse at 86% 16%, rgba(236,72,153,.14), transparent 40%),
+        linear-gradient(165deg, #08061a 0%, #05040f 48%, #070b1c 100%);
+    }
+    .css-thumb-leash .thumb-grid{
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(139,92,246,.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139,92,246,.16) 1px, transparent 1px);
+      background-size:20px 20px;
+      mask-image:radial-gradient(ellipse at 50% 52%, #000 12%, transparent 74%);
+      -webkit-mask-image:radial-gradient(ellipse at 50% 52%, #000 12%, transparent 74%);
+      opacity:.75;
+    }
+    .leash-beam{
+      position:absolute; width:240%; height:240%; left:50%; top:50%;
+      transform:translate(-50%,-50%);
+      background:conic-gradient(from 200deg, transparent 0 68%, rgba(139,92,246,.2) 80%, rgba(34,211,238,.32) 92%, transparent 100%);
+      animation:leashSpin 10s linear infinite;
+    }
+    .thumb-links{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(34deg, transparent 47%, rgba(167,139,250,.55) 49.6%, rgba(34,211,238,.4) 50.4%, transparent 53%),
+        linear-gradient(146deg, transparent 47%, rgba(139,92,246,.45) 49.6%, rgba(165,243,252,.28) 50.4%, transparent 53%);
+      mask-image:radial-gradient(circle at 50% 50%, #000 0%, transparent 62%);
+      -webkit-mask-image:radial-gradient(circle at 50% 50%, #000 0%, transparent 62%);
+      opacity:.8;
+    }
+    .thumb-node{
+      position:absolute; width:8px; height:8px; border-radius:50%;
+      background:#f5f3ff;
+      box-shadow:0 0 10px 3px rgba(139,92,246,.85), 0 0 22px 8px rgba(34,211,238,.28);
+      animation:nodeBlink 2.4s ease-in-out infinite;
+    }
+    .thumb-node.n1{ top:22%; left:16%; }
+    .thumb-node.n2{ top:26%; right:18%; background:#a5f3fc; animation-delay:.45s; }
+    .thumb-node.n3{ bottom:22%; left:24%; animation-delay:.9s; }
+    .thumb-node.n4{ bottom:18%; right:16%; background:#c4b5fd; animation-delay:1.3s; }
+    .thumb-core{
+      position:absolute; left:50%; top:52%; width:16px; height:16px;
+      margin:-8px 0 0 -8px; border-radius:50%;
+      background:radial-gradient(circle, #fff 0%, #c4b5fd 32%, #22d3ee 68%, transparent 76%);
+      box-shadow:0 0 18px 6px rgba(139,92,246,.75), 0 0 42px 14px rgba(34,211,238,.28);
+      animation:leashPulse 2.1s ease-in-out infinite;
+      z-index:2;
+    }
+    .thumb-ring, .thumb-ring-2{
+      position:absolute; left:50%; top:52%; border-radius:50%;
+      border:1px solid rgba(167,139,250,.5);
+      box-shadow:0 0 16px rgba(139,92,246,.32), inset 0 0 16px rgba(34,211,238,.1);
+      animation:leashRing 2.8s var(--ease-out) infinite;
+    }
+    .thumb-ring{ width:70px; height:70px; margin:-35px 0 0 -35px; }
+    .thumb-ring-2{
+      width:108px; height:108px; margin:-54px 0 0 -54px;
+      border-color:rgba(34,211,238,.28); animation-delay:.7s; animation-duration:3.4s;
+    }
+    .thumb-chrome{
+      position:absolute; left:12px; right:12px; bottom:12px; z-index:2;
+      display:flex; align-items:center; justify-content:space-between;
+      font-size:.62rem; font-weight:800; letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(226,232,255,.78);
+    }
+    .thumb-chrome b{
+      color:#e9d5ff;
+      text-shadow:0 0 12px rgba(139,92,246,.7);
+    }
+    .thumb-live{
+      display:inline-flex; align-items:center; gap:6px; color:#a5f3fc;
+    }
+    .thumb-live::before{
+      content:""; width:6px; height:6px; border-radius:50%; background:#c4b5fd;
+      box-shadow:0 0 8px #a78bfa; animation:nodeBlink 1.6s ease-in-out infinite;
+    }
+    @keyframes leashPulse{
+      0%,100%{ transform:scale(1); opacity:1; }
+      50%{ transform:scale(1.28); opacity:.82; }
+    }
+    @keyframes leashRing{
+      0%{ transform:scale(.86); opacity:.7; }
+      70%{ transform:scale(1.12); opacity:0; }
+      100%{ transform:scale(1.12); opacity:0; }
+    }
+    @keyframes leashSpin{ to{ transform:translate(-50%,-50%) rotate(360deg); } }
+    @keyframes nodeBlink{
+      0%,100%{ opacity:1; transform:scale(1); }
+      50%{ opacity:.45; transform:scale(.7); }
+    }
+
+    .css-thumb-sentinel{
+      background:
+        radial-gradient(ellipse at 50% 58%, rgba(16,185,129,.22), transparent 48%),
+        radial-gradient(ellipse at 82% 18%, rgba(34,211,238,.16), transparent 40%),
+        repeating-linear-gradient(0deg, rgba(52,211,153,.05) 0 1px, transparent 1px 4px),
+        linear-gradient(180deg, #03140f 0%, #020907 55%, #03110d 100%);
+    }
+    .sentinel-chrome{
+      position:absolute; top:0; left:0; right:0; height:28px; z-index:2;
+      display:flex; align-items:center; gap:6px; padding:0 12px;
+      background:linear-gradient(180deg, rgba(4,22,16,.92), rgba(2,10,8,.15));
+      border-bottom:1px solid rgba(52,211,153,.2);
+      font-size:.58rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(167,243,208,.82);
+    }
+    .sentinel-chrome i{
+      width:7px; height:7px; border-radius:50%; display:block; flex:none;
+    }
+    .sentinel-chrome i:nth-child(1){ background:#f87171; box-shadow:0 0 6px rgba(248,113,113,.7); }
+    .sentinel-chrome i:nth-child(2){ background:#fbbf24; box-shadow:0 0 6px rgba(251,191,36,.55); }
+    .sentinel-chrome i:nth-child(3){ background:#34d399; box-shadow:0 0 6px rgba(52,211,153,.7); margin-right:6px; }
+    .sentinel-scanlines{
+      position:absolute; inset:0;
+      background:repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.04) 0 1px,
+        transparent 1px 3px
+      );
+      opacity:.45; pointer-events:none;
+    }
+    .sentinel-scan{
+      position:absolute; left:0; right:0; height:42px;
+      background:linear-gradient(180deg, transparent, rgba(52,211,153,.2), transparent);
+      animation:scanMove 3.8s linear infinite;
+      pointer-events:none;
+    }
+    .radar-dial{
+      position:absolute; left:50%; top:56%; width:132px; height:132px;
+      margin:-66px 0 0 -66px; border-radius:50%;
+      border:1px solid rgba(52,211,153,.32);
+      box-shadow:
+        0 0 0 16px rgba(34,211,238,.045),
+        0 0 28px rgba(52,211,153,.22),
+        inset 0 0 24px rgba(16,185,129,.1);
+    }
+    .radar-dial::before, .radar-dial::after{
+      content:""; position:absolute; border-radius:50%;
+      border:1px solid rgba(165,243,252,.2);
+    }
+    .radar-dial::before{ inset:18px; }
+    .radar-dial::after{ inset:36px; border-color:rgba(52,211,153,.32); }
+    .radar-sweep{
+      position:absolute; left:50%; top:56%; width:132px; height:132px;
+      margin:-66px 0 0 -66px; border-radius:50%;
+      background:conic-gradient(from 0deg, transparent 0 250deg, rgba(34,211,238,.08) 300deg, rgba(52,211,153,.5) 360deg);
+      animation:radarSpin 3.6s linear infinite;
+      mask-image:radial-gradient(circle, #000 0 65px, transparent 66px);
+      -webkit-mask-image:radial-gradient(circle, #000 0 65px, transparent 66px);
+    }
+    .radar-cross{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, transparent calc(50% - .6px), rgba(52,211,153,.38) calc(50% - .6px), rgba(52,211,153,.38) calc(50% + .6px), transparent calc(50% + .6px)),
+        linear-gradient(0deg, transparent calc(56% - .6px), rgba(34,211,238,.28) calc(56% - .6px), rgba(34,211,238,.28) calc(56% + .6px), transparent calc(56% + .6px));
+      mask-image:radial-gradient(circle at 50% 56%, #000 0 66px, transparent 67px);
+      -webkit-mask-image:radial-gradient(circle at 50% 56%, #000 0 66px, transparent 67px);
+      opacity:.75;
+    }
+    .sentinel-core{
+      position:absolute; left:50%; top:56%; width:14px; height:14px;
+      margin:-7px 0 0 -7px; z-index:2;
+      background:radial-gradient(circle, #ecfdf5, #34d399 42%, #22d3ee 78%);
+      clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      box-shadow:0 0 18px 6px rgba(52,211,153,.55), 0 0 32px rgba(34,211,238,.28);
+      animation:sentinelPulse 1.8s ease-in-out infinite;
+    }
+    .sentinel-blip{
+      position:absolute; width:6px; height:6px; border-radius:50%;
+      background:#a5f3fc;
+      box-shadow:0 0 10px 3px rgba(34,211,238,.7);
+      animation:nodeBlink 1.9s ease-in-out infinite;
+    }
+    .sentinel-blip.b1{ top:38%; left:32%; }
+    .sentinel-blip.b2{ top:48%; right:28%; animation-delay:.5s; background:#6ee7b7; }
+    .sentinel-blip.b3{ bottom:22%; left:44%; animation-delay:1s; }
+    .sentinel-label{
+      position:absolute; left:12px; right:12px; bottom:10px; z-index:2;
+      display:flex; justify-content:space-between; align-items:center;
+      font-size:.58rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(167,243,208,.78);
+    }
+    .sentinel-label b{ color:#5eead4; text-shadow:0 0 10px rgba(52,211,153,.7); }
+    @keyframes radarSpin{ to{ transform:rotate(360deg); } }
+    @keyframes scanMove{
+      0%{ top:-40px; }
+      100%{ top:100%; }
+    }
+    @keyframes sentinelPulse{
+      0%,100%{ transform:scale(1); filter:brightness(1); }
+      50%{ transform:scale(1.22); filter:brightness(1.35); }
+    }
 
     /* ========== Achievements ========== */
     .section-achievements{
@@ -812,7 +1022,9 @@
       html{ scroll-behavior:auto; }
       .reveal{ opacity:1; transform:none; filter:none; transition:none; }
       body::before, body::after, .eyebrow, .pulse, .hero::before, .cta::after,
-      .hero-mesh, .hero-orb, .ambient-orb, .flagship::after, .project-card::after, .amb-card::after{ animation:none !important; }
+      .hero-mesh, .hero-orb, .ambient-orb, .flagship::after, .project-card::after, .amb-card::after,
+      .leash-beam, .thumb-core, .thumb-ring, .thumb-ring-2, .thumb-node, .thumb-live::before,
+      .radar-sweep, .sentinel-scan, .sentinel-core, .sentinel-blip{ animation:none !important; }
     }
   </style>
 </head>
@@ -1034,6 +1246,65 @@
             <div class="project-links">
               <a href="https://genwork-seven.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-link btn-live"><i class="fa-solid fa-globe"></i> Live</a>
               <a href="https://github.com/jubayir-hub-69/genwork" target="_blank" rel="noopener noreferrer" class="btn-link btn-github"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal d3" id="leash-protocol">
+          <div class="project-img-wrap">
+            <div class="css-thumb css-thumb-leash" aria-hidden="true">
+              <span class="thumb-grid"></span>
+              <span class="leash-beam"></span>
+              <span class="thumb-links"></span>
+              <span class="thumb-node n1"></span>
+              <span class="thumb-node n2"></span>
+              <span class="thumb-node n3"></span>
+              <span class="thumb-node n4"></span>
+              <span class="thumb-ring"></span>
+              <span class="thumb-ring-2"></span>
+              <span class="thumb-core"></span>
+              <span class="thumb-chrome"><b>LEASH</b><span class="thumb-live">Kill Switch</span></span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">LEASH Protocol</h3>
+            <p class="project-desc">Live Mandate Jury &amp; Kill Switch for Autonomous AI Agents built on GenLayer.</p>
+            <div class="stack-row">
+              <span class="stack">JavaScript</span>
+              <span class="stack">Python</span>
+              <span class="stack">Solidity</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn-link btn-github"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" id="sentinelos">
+          <div class="project-img-wrap">
+            <div class="css-thumb css-thumb-sentinel" aria-hidden="true">
+              <span class="sentinel-chrome"><i></i><i></i><i></i> Sentinel // MCP</span>
+              <span class="sentinel-scanlines"></span>
+              <span class="sentinel-scan"></span>
+              <span class="radar-dial"></span>
+              <span class="radar-sweep"></span>
+              <span class="radar-cross"></span>
+              <span class="sentinel-blip b1"></span>
+              <span class="sentinel-blip b2"></span>
+              <span class="sentinel-blip b3"></span>
+              <span class="sentinel-core"></span>
+              <span class="sentinel-label"><b>ARMED</b><span>Fail-Closed</span></span>
+            </div>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">SentinelOS</h3>
+            <p class="project-desc">Fail-Closed Risk-Defense Agent for Binance Agent OS &amp; MCP. Observes market data and enforces human-in-the-loop confirmation for irreversible actions.</p>
+            <div class="stack-row">
+              <span class="stack">Python</span>
+              <span class="stack">MCP Server</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn-link btn-github"><i class="fa-brands fa-github"></i> GitHub</a>
             </div>
           </div>
         </article>
