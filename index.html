@@ -706,7 +706,17 @@
     }
     .about-grid > *{ min-width:0; }
     .profile-card, .bio-card{ padding:32px; }
-    .profile-card{ display:flex; align-items:center; gap:18px; }
+    .profile-card{
+      display:flex;
+      align-items:center;
+    }
+    .profile-body{
+      display:grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap:14px 18px;
+      align-items:center;
+      width:100%;
+    }
     .avatar{
       width:104px; height:104px; flex:none; object-fit:cover; object-position:center 12%;
       border-radius:24px; border:1px solid rgba(165,243,252,.32);
@@ -746,7 +756,7 @@
     .tech-wrap{ margin-top:20px; padding:8px 22px 18px; }
     .tech-group{
       display:grid;
-      grid-template-columns: 112px minmax(0, 1fr);
+      grid-template-columns: 118px minmax(0, 1fr);
       gap: 8px 18px;
       align-items: start;
       padding: 16px 0;
@@ -754,7 +764,8 @@
     .tech-group + .tech-group{ border-top: 1px solid var(--card-border); }
     .tech-label{
       text-align:left; color:var(--kicker); font-weight:700; font-size:.72rem;
-      letter-spacing:.1em; text-transform:uppercase; margin:0; padding-top:11px;
+      letter-spacing:.08em; text-transform:uppercase; margin:0; padding-top:11px;
+      white-space:nowrap;
     }
     .tech-row{
       display:flex;
@@ -772,11 +783,6 @@
       text-align:left; color:var(--muted); font-size:.9rem; line-height:1.55;
       margin: 2px 0 0;
     }
-    .tech-group-ai .tech{
-      background:transparent;
-      color:var(--muted);
-      font-weight:500;
-    }
     .tech{
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
       width:auto;
@@ -792,18 +798,24 @@
       border-color:rgba(165,243,252,.5);
     }
     .tech svg{ width:16px; height:16px; display:block; }
-    .tech.grok{ background:rgba(34,211,238,.12); }
-    .tech.codex{ background:rgba(16,185,129,.12); }
-    .tech.claude{ background:rgba(251,146,60,.12); }
+    .tech.html{ background:rgba(251,146,60,.1); }
+    .tech.js{ background:rgba(250,204,21,.12); }
+    .tech.ts{ background:rgba(96,165,250,.12); }
     .tech.react{ background:rgba(34,211,238,.12); }
     .tech.next{ background:rgba(255,255,255,.06); }
     html[data-theme="light"] .tech.next{ background:rgba(15,23,42,.04); }
-    .tech.sol{ background:rgba(139,92,246,.12); }
-    .tech.aptos{ background:rgba(45,212,191,.12); }
-    .tech.js{ background:rgba(250,204,21,.12); }
-    .tech.gen{ background:rgba(167,139,250,.14); }
-    .tech.arc{ background:rgba(96,165,250,.12); }
-    .tech.dt{ background:rgba(20,241,149,.1); }
+    .tech.py{ background:rgba(52,211,153,.12); }
+    .tech.tool{ background:rgba(167,139,250,.1); }
+    .profile-links{
+      display:flex; flex-wrap:wrap; gap:8px 14px;
+      grid-column: 1 / -1;
+    }
+    .profile-links a{
+      color:var(--text-strong); font-size:.84rem; font-weight:600;
+      text-decoration:none; letter-spacing:.01em;
+    }
+    .profile-links a:hover{ color:#a5f3fc; }
+    html[data-theme="light"] .profile-links a:hover{ color:#0e7490; }
 
     /* ========== Projects ========== */
     .section-work{
@@ -1648,7 +1660,8 @@
         object-position:top center;
       }
       .project-img.img-logo{ object-fit:contain; }
-      .profile-card{ flex-direction:column; align-items:flex-start; }
+      .profile-card,
+      .profile-body{ display:flex; flex-direction:column; align-items:flex-start; }
       .proof-strip{
         border-radius:22px;
         flex-direction:column;
@@ -1825,11 +1838,19 @@
       </div>
       <div class="about-grid">
         <div class="panel profile-card reveal">
-          <img class="avatar" src="avatar.jpg.png" alt="Jubayir Haider" />
-          <div>
-            <h3>Jubayir Haider</h3>
-            <p class="profile-role">Web3 &amp; Full-Stack Developer</p>
-            <p class="profile-loc">Dhaka, Bangladesh</p>
+          <div class="profile-body">
+            <img class="avatar" src="avatar.jpg.png" alt="Jubayir Haider" />
+            <div>
+              <h3>Jubayir Haider</h3>
+              <p class="profile-role">Web3 &amp; Full-Stack Developer</p>
+              <p class="profile-loc">Dhaka, Bangladesh</p>
+            </div>
+            <div class="profile-links">
+              <a href="mailto:jubayirhaider56@gmail.com">Email</a>
+              <a href="https://www.linkedin.com/in/jubayir-haider-302aab372" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://discord.com/users/775330417414635530" target="_blank" rel="noopener noreferrer">Discord</a>
+              <a href="https://github.com/jubayir-hub-69" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
           </div>
         </div>
         <div class="panel bio-card reveal d1">
@@ -1840,19 +1861,23 @@
           <ul class="about-points">
             <li><span>What I build</span> dApps, websites, bots, and automation</li>
             <li><span>Who it's for</span> Founders, teams, and Web3 projects</li>
-            <li><span>How we start</span> A short brief on Telegram or email</li>
+            <li><span>How we start</span> A short brief by email</li>
           </ul>
         </div>
       </div>
 
       <div class="panel tech-wrap reveal d2">
-        <p class="tech-intro">Grouped by what ships in the product. AI tools sit last, because they only speed up the work.</p>
+        <p class="tech-intro">What I use for websites, apps, bots, and automation. The live projects below are the work you can open.</p>
         <div class="tech-group">
-          <div class="tech-label">Web</div>
+          <div class="tech-label">Frontend</div>
           <div class="tech-row">
+            <span class="tech html">
+              <i class="fa-brands fa-html5"></i> HTML &amp; CSS
+            </span>
             <span class="tech js">
               <i class="fa-brands fa-js"></i> JavaScript
             </span>
+            <span class="tech ts">TypeScript</span>
             <span class="tech react">
               <i class="fa-brands fa-react"></i> React
             </span>
@@ -1863,44 +1888,31 @@
           </div>
         </div>
         <div class="tech-group">
-          <div class="tech-label">Web3</div>
+          <div class="tech-label">Websites</div>
           <div class="tech-row">
-            <span class="tech sol">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4z" fill="none" stroke="#c4b5fd" stroke-width="1.6"/><path d="M12 8l3.5 2v4L12 16 8.5 14v-4L12 8z" fill="#a78bfa"/></svg>
-              Solidity
-            </span>
-            <span class="tech aptos">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l7 16H5L12 4z" fill="none" stroke="#5eead4" stroke-width="1.6"/><path d="M12 10l3.4 8H8.6L12 10z" fill="#2dd4bf"/></svg>
-              Aptos SDK
-            </span>
-            <span class="tech gen">
-              <i class="fa-solid fa-cube"></i> GenLayer
+            <span class="tech">Business sites</span>
+            <span class="tech">Portfolios</span>
+            <span class="tech">Web apps</span>
+          </div>
+        </div>
+        <div class="tech-group">
+          <div class="tech-label">Automation</div>
+          <div class="tech-row">
+            <span class="tech">Telegram bots</span>
+            <span class="tech">Workflows</span>
+            <span class="tech py">
+              <i class="fa-brands fa-python"></i> Python
             </span>
           </div>
         </div>
         <div class="tech-group">
-          <div class="tech-label">Networks</div>
+          <div class="tech-label">Tools</div>
           <div class="tech-row">
-            <span class="tech arc">Arc</span>
-            <span class="tech aptos">Aptos</span>
-            <span class="tech dt">dTelecom</span>
+            <span class="tech tool">
+              <i class="fa-brands fa-github"></i> GitHub
+            </span>
+            <span class="tech tool">Vercel</span>
           </div>
-        </div>
-        <div class="tech-group tech-group-ai">
-          <div class="tech-label">AI tools</div>
-          <div class="tech-row">
-            <span class="tech grok">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l2.4 6.2L21 12l-6.6 2.8L12 21l-2.4-6.2L3 12l6.6-2.8L12 3z" stroke="#a5f3fc" stroke-width="1.6" fill="rgba(165,243,252,.15)"/></svg>
-              Grok
-            </span>
-            <span class="tech codex">
-              <i class="fa-solid fa-terminal"></i> Codex
-            </span>
-            <span class="tech claude">
-              <i class="fa-solid fa-asterisk"></i> Claude
-            </span>
-          </div>
-          <p class="tech-note">Used while building. They are not the product stack.</p>
         </div>
       </div>
     </section>
@@ -2182,43 +2194,55 @@
       <div class="section-head reveal">
         <div class="kicker">Contact</div>
         <h2 class="section-title">Tell me what you need built</h2>
-        <p class="section-sub">Open to freelance projects, collaborations, and remote Web3 roles. Telegram and email are the two I reply to first.</p>
+        <p class="section-sub">Open to freelance projects, collaborations, and remote roles. Email is the best way to start. LinkedIn, Discord, and GitHub are here for the profile and the code.</p>
       </div>
-      <p class="contact-group-label">Preferred</p>
+      <p class="contact-group-label">Best ways to reach me</p>
       <div class="contact-grid contact-grid-primary">
-        <a class="panel contact-card reveal" href="https://t.me/JUBAYIR69" target="_blank" rel="noopener noreferrer">
-          <span class="contact-badge">Preferred</span>
-          <div class="contact-icon"><i class="fa-brands fa-telegram"></i></div>
-          <h3>Telegram</h3>
-          <p>@JUBAYIR69</p>
-          <p class="contact-hint">Best for a short project brief</p>
-          <span class="contact-action">Message on Telegram <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
-        </a>
-        <a class="panel contact-card reveal d1" href="mailto:jubayirhaider56@gmail.com">
-          <span class="contact-badge">Preferred</span>
+        <a class="panel contact-card reveal" href="mailto:jubayirhaider56@gmail.com">
           <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
           <h3>Email</h3>
           <p>jubayirhaider56@gmail.com</p>
-          <p class="contact-hint">Best for roles, proposals, and longer details</p>
+          <p class="contact-hint">Project briefs, proposals, and roles</p>
           <span class="contact-action">Send an email <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
         </a>
-      </div>
-      <p class="contact-group-label contact-group-label-alt">Also available</p>
-      <div class="contact-grid contact-grid-secondary">
+        <a class="panel contact-card reveal d1" href="https://www.linkedin.com/in/jubayir-haider-302aab372" target="_blank" rel="noopener noreferrer">
+          <div class="contact-icon"><i class="fa-brands fa-linkedin"></i></div>
+          <h3>LinkedIn</h3>
+          <p>Jubayir Haider</p>
+          <p class="contact-hint">For recruiters and companies</p>
+          <span class="contact-action">View LinkedIn <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+        </a>
         <a class="panel contact-card reveal d2" href="https://discord.com/users/775330417414635530" target="_blank" rel="noopener noreferrer">
           <div class="contact-icon"><i class="fa-brands fa-discord"></i></div>
           <h3>Discord</h3>
           <p>JUBAYIR69</p>
-          <p class="contact-hint">Community chats</p>
+          <p class="contact-hint">Direct messages</p>
+          <span class="contact-action">Open Discord <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
         </a>
-        <a class="panel contact-card reveal d3" href="https://x.com/alr80171" target="_blank" rel="noopener noreferrer">
+        <a class="panel contact-card reveal d3" href="https://github.com/jubayir-hub-69" target="_blank" rel="noopener noreferrer">
+          <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
+          <h3>GitHub</h3>
+          <p>jubayir-hub-69</p>
+          <p class="contact-hint">Public code and live projects</p>
+          <span class="contact-action">View GitHub <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+        </a>
+      </div>
+      <p class="contact-group-label contact-group-label-alt">Also available</p>
+      <div class="contact-grid contact-grid-secondary">
+        <a class="panel contact-card reveal" href="https://t.me/JUBAYIR69" target="_blank" rel="noopener noreferrer">
+          <div class="contact-icon"><i class="fa-brands fa-telegram"></i></div>
+          <h3>Telegram</h3>
+          <p>@JUBAYIR69</p>
+          <p class="contact-hint">Short messages</p>
+        </a>
+        <a class="panel contact-card reveal d1" href="https://x.com/alr80171" target="_blank" rel="noopener noreferrer">
           <div class="contact-icon"><i class="fa-brands fa-x-twitter"></i></div>
           <h3>X</h3>
           <p>@alr80171</p>
           <p class="contact-hint">Public profile</p>
         </a>
       </div>
-      <p class="contact-help">Telegram or email is enough. Say what you want built, your timeline, and whether this is freelance work or a role.</p>
+      <p class="contact-help">An email is enough to start. Say what you want built, your timeline, and whether this is freelance work or a role.</p>
     </section>
 
     <footer class="site-footer reveal">
@@ -2242,10 +2266,12 @@
         </div>
         <div class="footer-col">
           <h4>Reach me</h4>
-          <a class="footer-main" href="https://t.me/JUBAYIR69" target="_blank" rel="noopener noreferrer">Telegram · @JUBAYIR69</a>
           <a class="footer-main" href="mailto:jubayirhaider56@gmail.com">Email · jubayirhaider56@gmail.com</a>
-          <p class="footer-note">Preferred for projects and roles</p>
-          <a href="https://discord.com/users/775330417414635530" target="_blank" rel="noopener noreferrer">Discord</a>
+          <a class="footer-main" href="https://www.linkedin.com/in/jubayir-haider-302aab372" target="_blank" rel="noopener noreferrer">LinkedIn · Jubayir Haider</a>
+          <a class="footer-main" href="https://discord.com/users/775330417414635530" target="_blank" rel="noopener noreferrer">Discord · JUBAYIR69</a>
+          <a class="footer-main" href="https://github.com/jubayir-hub-69" target="_blank" rel="noopener noreferrer">GitHub · jubayir-hub-69</a>
+          <p class="footer-note">Email for project inquiries. LinkedIn for companies. GitHub for the code.</p>
+          <a href="https://t.me/JUBAYIR69" target="_blank" rel="noopener noreferrer">Telegram · @JUBAYIR69</a>
           <a href="https://x.com/alr80171" target="_blank" rel="noopener noreferrer">X · @alr80171</a>
         </div>
       </div>
